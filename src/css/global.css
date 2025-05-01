@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@layer components {
+    .containers {
+        width: 1200px;
+     }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f2f4f9;
+    color: rgb(39, 39, 39);
+}
+
+
+.animated{
+    transition: all ease-in-out 0.05s;
+}
