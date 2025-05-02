@@ -1,12 +1,18 @@
 export const getData = async (userInput: string) => {
-  const prompt = `Berikan list impor barang terbaik untuk produk pangan yang berkaitan dengan ${userInput} dalam format JSON yang valid dengan struktur berikut:
-      {
-        "services": [
-          {"name": "Nama Perusahaan", "url": "https://contoh.com"},
-          ...
-        ]
-      }
-      Hanya kembalikan JSON tanpa penjelasan, markup, atau catatan tambahan apapun.`;
+  const prompt = `Berikan daftar nama perusahaan beserta link website aktif dan terpercaya yang berkaitan dengan produk "${userInput}". 
+  Balas dalam format JSON yang valid dan sesuai dengan struktur berikut:
+  
+  {
+    "explanation_ai": [
+      { "prompt": "Penjelasan singkat dari AI tentang hasil pencarian berdasarkan '${userInput}'" }
+    ],
+    "services": [
+      { "name": "Nama Perusahaan", "url": "https://link-website.com" },
+      ...
+    ]
+  }
+  
+  Hanya kembalikan JSON **tanpa tambahan penjelasan, teks, markup HTML, atau catatan lainnya** di luar struktur JSON di atas.`;
 
   const res = await fetch(import.meta.env.VITE_CHATBOT_API_URL, {
     method: "POST",

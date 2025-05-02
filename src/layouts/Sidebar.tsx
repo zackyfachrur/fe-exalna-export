@@ -29,7 +29,7 @@ const Navigate: NavigateProps[] = [
   {
     icon: <i className="ri-bard-line"></i>,
     to: "/chat",
-    text: "AI",
+    text: "Ask AI",
   },
   {
     icon: <i className="ri-message-3-line"></i>,
