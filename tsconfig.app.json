@@ -25,7 +25,8 @@
       "@layouts/*": ["./src/layouts/*"],
       "@store/*": ["./src/store/*"],
       "@img/*": ["./src/assets/img/*"],
-      "@services/*": ["./src/services/*"]
+      "@services/*": ["./src/services/*"],
+      "@libs/*": ["./src/libs/*"]
     },
 
     /* Linting */

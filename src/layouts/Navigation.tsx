@@ -1,11 +1,3 @@
-// const SearchProduct = () => {
-//     return (
-//         <ul className="w-[50%]">
-//             <li className="border-2 rounded-2xl border-gray-100"><div className="px-4 flex gap-2 justify-center items-center"><i className="ri-search-line"></i><input type="text" className="py-2 outline-none w-full" placeholder="Search ekspor for your product" /></div></li>
-//         </ul>
-//     )
-// }
-
 import { ButtonBlue, ButtonTransparent } from "@components/ui/Button";
 
 const Navigation = () => {

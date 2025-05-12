@@ -1,9 +1,15 @@
+
+
 const HistoryChat = () => { 
     return (
-        <nav className="bg-white w-[280px] flex flex-col justify-between z-50 mx-6 my-6 rounded-2xl drop-shadow-xl">
+        <nav className="bg-white w-[300px] flex flex-col justify-between z-30 mx-6 my-6 rounded-2xl drop-shadow-xl ml-20">
           <>
-            <ul className="py-12 flex flex-col">
-           
+            <ul className="py-4 flex flex-col px-6 text-gray-600 gap-1 font-medium">
+            <h2 className="mb-1 px-4 mt-4 bg-blue-600 text-white rounded-full text-center font-bold">Recent Chat</h2>
+            <li className=" hover:bg-gray-100 rounded-full px-4 py-2 cursor-pointer bg-gray-200">Berikan 10 Product...</li>
+            <li className=" hover:bg-gray-100 rounded-full px-4 py-2 cursor-pointer">Bagaimana Cara Me..</li>
+            <li className=" hover:bg-gray-100 rounded-full px-4 py-2 cursor-pointer">Coba Lakukan Sebe...</li>
+            <li className=" hover:bg-gray-100 rounded-full px-4 py-2 cursor-pointer">Apakah Memiliki Cu...</li>
             </ul>
             <ul className="px-8 py-6 flex gap-4 flex-col">
               <li>
@@ -12,16 +18,7 @@ const HistoryChat = () => {
                   <span>New Chat</span>
                 </button>
               </li>
-              {/* <SidebarList
-                              logo={<i className="ri-settings-3-line text-xl"></i>}
-                              text="Settings"
-                              className="text-gray-600 cursor-pointer hover:text-gray-900 flex gap-2 text-lg font-medium"
-                          />
-                          <SidebarList
-                              logo={<i className="ri-logout-box-line text-xl"></i>}
-                              text="Log Out"
-                              className="text-gray-600 cursor-pointer hover:text-gray-900 flex gap-2 text-lg font-medium"
-                          /> */}
+              
             </ul>
           </>
       </nav>
