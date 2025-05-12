@@ -4,7 +4,7 @@ const Hero = () => {
       <div className="containers flex justify-start items-center z-10">
         <span
           content=""
-          className="w-[200px] left-0 bottom-0 absolute -z-20 h-[200px] bg-blue-600 blur-[50rem] rounded-full"
+          className="w-[200px] left-0 bottom-0 absolute -z-30 h-[200px] bg-blue-600 blur-[50rem] rounded-full"
         ></span>
         <div className="flex flex-col">
           <h2 className="text-6xl font-bold drop-shadow-2xl">

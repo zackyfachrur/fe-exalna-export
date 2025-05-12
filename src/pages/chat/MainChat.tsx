@@ -49,18 +49,18 @@ const MainChat = () => {
         <div className="h-[90vh] flex flex-col justify-center">
           <div
             ref={chatBoxRef}
-            className="mt-6 w-full px-6 py-4 space-y-2 overflow-y-auto max-h-[60vh] rounded-lg bg-white"
+            className="mt-6 w-full px-6 py-4 space-y-2 overflow-y-auto max-h-[60vh] rounded-lg bg-white/30 border-white border-2"
           >
             {loading && <span className="loader"></span>}
 
             {!loading && services.length === 0 && explanations.length === 0 && (
               <>
-                <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-300 bg-clip-text text-white/0">
-                  Hello, User Computer
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-white/0">
+                  Hello, Jawir La Qwerty
                 </h2>
-                <p className="text-gray-400">
+                {/* <p className="text-gray-400">
                   Belum ada hasil, silakan kirim pertanyaan.
-                </p>
+                </p> */}
               </>
             )}
 
