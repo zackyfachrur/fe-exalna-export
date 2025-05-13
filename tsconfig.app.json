@@ -26,7 +26,8 @@
       "@store/*": ["./src/store/*"],
       "@img/*": ["./src/assets/img/*"],
       "@services/*": ["./src/services/*"],
-      "@libs/*": ["./src/libs/*"]
+      "@libs/*": ["src/libs/*"],
+      "@hooks/*": ["./src/hooks/*"]
     },
 
     /* Linting */

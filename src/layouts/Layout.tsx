@@ -1,19 +1,27 @@
-import { Outlet } from 'react-router-dom'
-import Navigation from '@layouts/Navigation'
-import Sidebar from '@layouts/Sidebar'
+import { Outlet, matchPath } from "react-router-dom";
+import Navigation from "@layouts/Navigation";
+import Sidebar from "@layouts/Sidebar";
+import { MotionLayoutProvider } from "@hooks/motion-layout/MotionLayoutProvider";
 
 const Layout = () => {
+  const routeLogin = "/sign-in"
+  const routeRegister = "/sign-up"
+  const matchLogin = matchPath(routeLogin, location.pathname);
+  const matchRegister = matchPath(routeRegister, location.pathname)
+
   return (
     <>
-      <Navigation />
-      <div className="flex flex-row w-full justify-between">
-        <Sidebar />
-        <main className="flex-grow">
-          <Outlet /> {/* Ini tempat halaman muncul */}
-        </main>
-      </div>
+      <MotionLayoutProvider>
+        {matchLogin || matchRegister ? (null) : <Navigation />}
+        <div className="flex flex-row w-full justify-between">
+          {matchLogin || matchRegister ? (null) : <Sidebar />} 
+          <main className="flex-grow">
+            <Outlet />
+          </main>
+        </div>
+      </MotionLayoutProvider>
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
