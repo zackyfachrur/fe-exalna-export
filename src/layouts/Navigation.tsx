@@ -9,10 +9,9 @@ const Navigation = () => {
         <div className="flex flex-row gap-8 justify-center items-center">
           <i className="ri-search-line text-2xl cursor-pointer"></i>
           <i className="ri-notification-2-line text-2xl cursor-pointer"></i>
-          {/* <img src={imageUrl} alt="Avatar Icon" className="w-[40px] h-[40px] object-cover rounded-full" /> */}
           <div className="flex gap-1 border-2 rounded-2xl px-2 py-1 border-blue-600">
-            <ButtonTransparent>Sign In</ButtonTransparent>
-            <ButtonBlue>Sign Up</ButtonBlue>
+            <ButtonTransparent onClick={() => window.location.assign("/sign-in")}>Sign In</ButtonTransparent>
+            <ButtonBlue onClick={() => window.location.assign("/sign-up")}>Sign Up</ButtonBlue>
           </div>
         </div>
       </nav>
