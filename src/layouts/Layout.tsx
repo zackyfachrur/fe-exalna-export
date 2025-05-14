@@ -1,7 +1,7 @@
 import { Outlet, matchPath } from "react-router-dom";
 import Navigation from "@layouts/Navigation";
 import Sidebar from "@layouts/Sidebar";
-import { MotionLayoutProvider } from "@hooks/motion-layout/MotionLayoutProvider";
+import { MotionLayoutProvider } from "@context/MotionLayoutProvider";
 
 const Layout = () => {
   const routeLogin = "/sign-in"

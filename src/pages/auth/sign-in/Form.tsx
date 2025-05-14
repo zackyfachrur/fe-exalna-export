@@ -17,7 +17,7 @@ const Form = () => {
 
   return (
     <div className="w-[40%] flex justify-center items-center flex-col">
-      <div className="flex justify-center items-start flex-col w-[65%] gap-4">
+      <div className="flex justify-center items-start flex-col w-[65%] gap-5">
         <div className="flex flex-col">
           <h2 className="text-4xl font-bold w-full">Continue your journey</h2>
           <p className="font-medium">
@@ -66,7 +66,7 @@ const Form = () => {
               register={register}
               error={errors.confirmPassword}
             />
-          <button className="bg-blue-600 font-medium px-4 py-3 text-white rounded-2xl cursor-pointer hover:opacity-85 animate active:scale-95">
+          <button className="bg-blue-600 font-medium px-4 py-3 text-white rounded-2xl cursor-pointer hover:opacity-85 animate active:scale-95 shadow-xl shadow-blue-600/30 animate">
             Sign In
           </button>
           <div className="flex flex-row w-full items-center gap-4 text-gray-300 font-bold">

@@ -1,6 +1,6 @@
 import { motion, NavLink, AnimatePresence } from "@libs/pages";
 import { NavigateProps, SidebarProps } from "@type/layouts";
-import { useMotionLayout } from "@hooks/motion-layout/useMotionLayout";
+import { useMotionLayout } from "@hooks/useMotionLayout";
 
 // Navigation Utils
 const Navigate: NavigateProps[] = [
@@ -70,10 +70,10 @@ export const Sidebar = () => {
         ></i>
       </motion.button>
       <motion.div
-        initial={{ opacity: 1, x: 0 }} // Awal animasi dengan posisi 0 dan opacity 1
-        animate={{ x: showSide ? 0 : -400 }} // Jika showSide false, bergeser ke kiri
-        exit={{ opacity: 1 }} // Tidak ada perubahan opacity saat keluar
-        transition={{ duration: 0.5 }} // Durasi animasi 0.3 detik
+        initial={{ opacity: 1, x: 0 }}
+        animate={{ x: showSide ? 0 : -400 }}
+        exit={{ opacity: 1 }} 
+        transition={{ duration: 0.5 }} 
         className={`bg-white w-auto flex flex-col justify-between pt-12 absolute left-0 top-0 h-full z-40`}
       >
         <>
@@ -82,7 +82,7 @@ export const Sidebar = () => {
             initial={{ opacity: 0, x: -100 }} // Masuk dari kiri
             animate={{ opacity: 1, x: 0 }} // Animasi saat muncul
             exit={{ opacity: 0, x: -100 }} // Animasi saat keluar
-            transition={{ duration: 0.3 }} // Durasi transisi
+            transition={{ duration: 1.5 }} // Durasi transisi
             className="py-12 flex flex-col"
           >
             {Navigate.map((content, index) => (
@@ -104,7 +104,7 @@ export const Sidebar = () => {
             initial={{ opacity: 0, y: 20 }} // Masuk dari bawah
             animate={{ opacity: 1, y: 0 }} // Animasi saat muncul
             exit={{ opacity: 0, y: 20 }} // Animasi saat keluar
-            transition={{ duration: 0.3 }} 
+            transition={{ duration: 1.5 }} 
             className="px-8 py-12 flex gap-4 flex-col"
           >
             <li>
@@ -120,10 +120,10 @@ export const Sidebar = () => {
               </button>
             </li>
             <li >
-              <button className="flex flex-row gap-2 font-medium px-4 cursor-pointer hover:opacity-80 animate text-lg">
+              {/* <button className="flex flex-row gap-2 font-medium px-4 cursor-pointer hover:opacity-80 animate text-lg">
                 <i className="ri-logout-circle-line text-xl"></i>
                 <span>Logout</span>
-              </button>
+              </button> */}
             </li>
           </motion.ul>
         </>
