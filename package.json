@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.1",
     "@tailwindcss/vite": "^4.1.4",
+    "install": "^0.13.0",
     "motion": "^12.11.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -21,6 +22,7 @@
     "react-router-dom": "^7.5.3",
     "remixicon": "^4.6.0",
     "tailwindcss": "^4.1.4",
+    "wouter": "^3.7.0",
     "zod": "^3.24.4"
   },
   "devDependencies": {

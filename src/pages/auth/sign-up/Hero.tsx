@@ -1,14 +1,32 @@
+
 import WebLogoWhite from "@assets/img/Web-Logo-White.png";
 import Airplane from "@assets/img/Airplane-Hero-Maskot.png";
 import { ListFeatureProps } from "@type/pages";
+import { motion } from "@libs/pages";
 
 const Hero = () => {
   return (
     <div className="bg-[url('@assets/img/Auth-Hero-Pattern.png')] h-[100vh] w-[60%] flex justify-center items-center flex-col gap-4 px-12 overflow-clip">
-      <img src={Airplane} alt="Airplane Images" className="w-[100%] -mr-[100%] opacity-95" />
+       <motion.img
+        initial={{ opacity: 1, x: 800, y: 0 }} 
+        animate={{ opacity: 1, x: -2000, y: -400 }} 
+        exit={{ opacity: 0, x: -100, y: -400 }} 
+        transition={{ duration: 25 }}
+        src={Airplane}
+        alt="Airplane Images"
+        className="w-[100%] -mr-[100%] opacity-95"
+        draggable={false}
+      />
       <div className="flex flex-col gap-4 absolute">
         <div className="flex items-center flex-col">
-            <img src={WebLogoWhite} alt="Web Logo White" />
+          <motion.img
+            initial={{ opacity: 0, x: 0 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            exit={{ opacity: 0, x: -100 }} 
+            transition={{ duration: 1 }} 
+            src={WebLogoWhite}
+            alt="Web Logo White"
+          />
           <h2 className="text-white font-bold text-5xl">Join the platform</h2>
           <p className="font-medium text-white text-xl flex items-center gap-2">
             Access your smart AI-powered import-export platform

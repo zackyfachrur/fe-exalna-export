@@ -1,5 +1,5 @@
 import { motion } from "@libs/pages"
-import { useMotionLayout } from "@hooks/motion-layout/useMotionLayout";
+import { useMotionLayout } from "@hooks/useMotionLayout";
 
 const HistoryChat = () => { 
   const { showSide } = useMotionLayout();

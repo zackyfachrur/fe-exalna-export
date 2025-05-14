@@ -49,3 +49,13 @@ export type ValidFieldNames =
     | "yearsOfExperience"
     | "password"
     | "confirmPassword"
+
+/* 
+    Lazy Load Images Type
+*/
+
+export type LazyLoadImageType = {
+    src?: string | undefined;
+    alt?: string | undefined;
+    className?: string | undefined;
+}

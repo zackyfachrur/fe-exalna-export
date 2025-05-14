@@ -16,8 +16,8 @@ body {
 }
 
 
-.animated{
-    transition: all ease-in-out 0.05s;
+.animate {
+    transition: all ease-in-out 0.1s;
 }
 
 .loader {

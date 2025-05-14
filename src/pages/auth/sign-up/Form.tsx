@@ -17,7 +17,7 @@ const Form = () => {
 
   return (
     <div className="w-[40%] flex justify-center items-center flex-col">
-      <div className="flex justify-center items-start flex-col w-[65%] gap-4">
+      <div className="flex justify-center items-start flex-col w-[65%] gap-5">
         <div className="flex flex-col">
           <h2 className="text-4xl font-bold w-full">Get started today</h2>
           <p className="font-medium">
@@ -30,7 +30,7 @@ const Form = () => {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-4 w-full"
+          className="flex flex-col gap-5 w-full"
         >
           <div className="flex gap-2">
             <FormField
@@ -92,7 +92,7 @@ const Form = () => {
               error={errors.confirmPassword}
             />
           </div>
-          <button className="bg-blue-600 font-medium px-4 py-3 text-white rounded-2xl cursor-pointer hover:opacity-85 animate active:scale-95">
+          <button className="bg-blue-600 font-medium px-4 py-3 text-white rounded-2xl cursor-pointer hover:opacity-85 animate active:scale-95 shadow-xl shadow-blue-600/30 animate">
             Sign Up
           </button>
           <div className="flex flex-row w-full items-center gap-4 text-gray-300 font-bold">
