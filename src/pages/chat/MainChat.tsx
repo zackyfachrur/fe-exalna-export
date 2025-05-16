@@ -1,104 +1,89 @@
-import { useState, useEffect, useRef } from "react";
-import { getData } from "@services/ChatServices";
+import { useEffect, useState } from "react";
+import useUserName from "@hooks/useUserName";
 import { ChatContainer } from "@components/ui/Container";
-import { DataItem } from "@type/pages";
-import Avatar from "@img/avatar-mask.png";
-
-// Layout
+import AILogo from "@img/AI-Logo.png";
+import { ExplanationItem, ServiceItem } from "@type/fetch";
 import InputChat from "./InputChat";
+import { useChatLogic } from "@hooks/useChatLogic";
+
+import { useSelector} from "react-redux";
+import { RootState} from "@store/index";
 
 const MainChat = () => {
-  const [services, setServices] = useState<DataItem[]>([]);
-  const [explanations, setExplanations] = useState<DataItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const username = useUserName();
+  const { loading, handlePrompt } = useChatLogic();
 
-  const chatBoxRef = useRef<HTMLDivElement>(null);
+  const selectedChat = useSelector((state: RootState) => state.chat.selectedChat);
 
-  const handlePrompt = async (input: string) => {
-    setLoading(true);
-    setError("");
-    try {
-      const response = await getData(input);
-      if (
-        Array.isArray(response.services) &&
-        Array.isArray(response.explanation_ai)
-      ) {
-        setServices(response.services);
-        setExplanations(response.explanation_ai);
-      } else {
-        setError("Data format is invalid");
-      }
-    } catch (err) {
-      console.error("Error getting data: ", err);
-      setError("Connection Error while getting data");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [parsedData, setParsedData] = useState<{
+    explanation_ai: ExplanationItem[];
+    services: ServiceItem[];
+  }>({ explanation_ai: [], services: [] });
 
   useEffect(() => {
-    if (chatBoxRef.current) {
-      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    if (selectedChat) {
+      try {
+        const parsed = JSON.parse(selectedChat.response);
+        setParsedData({
+          explanation_ai: parsed.explanation_ai || [],
+          services: parsed.services || [],
+        });
+      } catch (err) {
+        console.error("Gagal parse response JSON", err);
+        setParsedData({ explanation_ai: [], services: [] });
+      }
+    } else {
+      setParsedData({ explanation_ai: [], services: [] });
     }
-  }, [services, explanations]);
+  }, [selectedChat]);
 
   return (
     <section className="h-[100vh] w-full flex flex-col items-center justify-center">
       <ChatContainer>
-        <div className="h-[90vh] flex flex-col justify-center">
+        <div className="h-[90vh] flex flex-col justify-center gap-4">
+          {selectedChat ? (
+            <div className="self-end bg-white px-8 py-4 rounded-2xl rounded-tr-none">
+              <h3 className="font-medium italic text-lg">{selectedChat.keyword}</h3>
+            </div>
+          ) : (
+            <h3 className="font-bold text-6xl text-white/0 bg-clip-text bg-gradient-to-r from-blue-600 to-red-500">Hello, {username}</h3>
+          )}
+          {loading && <span className="loader"></span>}
           <div
-            ref={chatBoxRef}
-            className="mt-6 w-full px-6 py-4 space-y-2 overflow-y-auto max-h-[60vh] rounded-lg bg-white/30 border-white border-2"
+            className={
+              selectedChat
+                ? "w-full px-12 py-8 space-y-4 overflow-y-auto max-h-[60vh] rounded-xl bg-white rounded-tl-none drop-shadow-2xl"
+                : ""
+            }
           >
-            {loading && <span className="loader"></span>}
-
-            {!loading && services.length === 0 && explanations.length === 0 && (
-              <>
-                <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-white/0">
-                  Hello, Jawir La Qwerty
-                </h2>
-                {/* <p className="text-gray-400">
-                  Belum ada hasil, silakan kirim pertanyaan.
-                </p> */}
-              </>
-            )}
-
-            {explanations.map((item) => (
-              <>
-                <div className="flex items-center gap-2 border-b-2 border-blue-600 pb-2">
+            {parsedData.explanation_ai.map((item, idx) => (
+              <div key={idx}>
+                <div className="flex items-center gap-2 border-b-2 border-blue-600 pb-4 mb-6 pt-4">
                   <img
-                    src={Avatar}
-                    alt="Avatar Images"
+                    src={AILogo}
+                    alt="Avatar"
                     className="h-[40px] w-[40px] rounded-full"
                   />
-                  <h2 className="font-bold">Haruto AI</h2>
+                  <h2 className="font-bold">Gemini AI</h2>
                 </div>
-                <p key={item.prompt} className="">
-                  {item.prompt}
-                </p>
-              </>
+                <p>{item.prompt}</p>
+              </div>
             ))}
 
-            {services.map((item) => (
-              <div
-                key={item.name ?? "No Named" + item.url ?? "Unknown URL"}
-                className="rounded-lg grid grid-cols-2"
-              >
-                <p className="font-semibold ">{item.name}</p>
+            {parsedData.services.map((item, idx) => (
+              <div key={idx} className="grid grid-cols-2 gap-2 ">
+                <p className="font-semibold">{item.name}</p>
                 <a
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className=""
+                  className="underline"
                 >
                   {item.url}
                 </a>
               </div>
             ))}
           </div>
-
-          {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
         </div>
 
         <InputChat onSend={handlePrompt} loading={loading} />

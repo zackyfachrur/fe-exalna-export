@@ -10,7 +10,7 @@ const Hero = () => {
         initial={{ opacity: 1, x: 800, y: 0 }} 
         animate={{ opacity: 1, x: -2000, y: -400 }} 
         exit={{ opacity: 0, x: -100, y: -400 }} 
-        transition={{ duration: 25 }} 
+        transition={{ duration: 20 }} 
         src={Airplane}
         alt="Airplane Images"
         className="w-[100%] -mr-[100%] opacity-95"
