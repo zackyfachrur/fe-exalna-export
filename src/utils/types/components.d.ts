@@ -21,34 +21,56 @@ export interface ButtonProps {
 
 import { FieldError, UseFormRegister } from "react-hook-form";
 
-export type FormData = {
-    email: string;
-    companyName: string;
-    userName: string;
-    companyCategories: string;
-    yearsOfExperience: string;
-    password: string;
-    confirmPassword: string;
+/* Form Data Types */
+export interface BaseFormData {
+  username: string;
+  email: string;
+  companyName: string;
+  companyCategories: string;
+  yearsOfExperience: number; 
+  password: string;
+  confirmPassword: string;
 }
 
-export type FormFieldProps = { 
-    type?: string;
-    name: ValidFieldNames;
-    register: UseFormRegister<FormData>;
-    inputId?: string;
-    labelText?: string;
-    error: FieldError | undefined;
-    valueAsNumber?: boolean;
+export type SignUpFormData = BaseFormData;
+
+export interface SignInFormData {
+  identifier: string;
+  password: string;
+  confirmPassword: string;
 }
 
-export type ValidFieldNames = 
-    | "email"
-    | "companyName"
-    | "userName"
-    | "companyCategories"
-    | "yearsOfExperience"
-    | "password"
-    | "confirmPassword"
+export type SignUpValidFieldNames = keyof SignUpFormData;
+export type SignInValidFieldNames = keyof SignInFormData;
+
+export type OptionType = {
+  label: string;
+  value: string;
+};
+
+export type SignUpFormFieldProps = { 
+  type?: string;
+  name: SignUpValidFieldNames;
+  register: UseFormRegister<SignUpFormData>;
+  inputId?: string;
+  labelText?: string;
+  error: FieldError | FieldError[] | undefined;
+  valueAsNumber?: boolean;
+  options?: OptionType[];
+  multiple?: boolean;
+}
+
+export type SignInFormFieldProps = { 
+  type?: string;
+  name: SignInValidFieldNames;
+  register: UseFormRegister<SignInFormData>;
+  inputId?: string;
+  labelText?: string;
+  error: FieldError | FieldError[] | undefined;
+  valueAsNumber?: boolean;
+  options?: OptionType[];
+  multiple?: boolean;
+}
 
 /* 
     Lazy Load Images Type

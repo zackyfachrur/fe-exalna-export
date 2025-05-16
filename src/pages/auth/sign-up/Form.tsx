@@ -1,18 +1,48 @@
-// import { Form } from "react-hook-form";
-import FormField from "@components/ui/FormField";
-import { FormData } from "@type/components";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signUpSchema } from "@services/validationSchemas";
+import { SignUpFormData } from "@type/components";
+import { RegisterField } from "@components/ui/FormField";
+import axios from "axios";
+import GoogleButton from "@components/others/withGoogleAuth";
+import { toast } from "react-toastify";
 
 const Form = () => {
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // setError,
-  } = useForm<FormData>();
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpSchema),
+  });
 
-  const onSubmit = async (data: FormData) => {
-    console.log("Success", data);
+  const onSubmit = async (data: SignUpFormData) => {
+    try {
+      const payload = {
+        ...data,
+      };
+
+      const response = await axios.post(
+        `http://localhost:3001/register`,
+        payload
+      );
+      console.log("Registration successful", response.data);
+      toast.success("Registration successful! Please sign in.");
+      setTimeout(() => { 
+        window.location.assign("/sign-in")
+       }, 200)
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error("Your have already have an Account! Please sign in.");
+        console.error(
+          "Error during registration:",
+          error.response?.data || error.message
+        );
+      } else {
+        console.error("Unexpected error:", error);
+      }
+    }
   };
 
   return (
@@ -32,16 +62,16 @@ const Form = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-5 w-full"
         >
-          <div className="flex gap-2">
-            <FormField
+          <div className="grid grid-cols-2 gap-2">
+            <RegisterField
               type="text"
-              name="userName"
+              name="username"
               labelText="Username"
-              inputId="userName"
+              inputId="username"
               register={register}
-              error={errors.userName}
+              error={errors.username}
             />
-            <FormField
+            <RegisterField
               type="email"
               name="email"
               labelText="Email"
@@ -50,7 +80,21 @@ const Form = () => {
               error={errors.email}
             />
           </div>
-          <FormField
+          <RegisterField
+            type="select"
+            name="companyCategories"
+            labelText="Email Domain"
+            inputId="emailDomain"
+            register={register}
+            error={errors.companyCategories}
+            options={[
+              { label: "Consumer Good (Food, etc.)", value: "Consumer Good" },
+              { label: "Industrial Goods (Raw materials, etc.)", value: "Industrial Goods" },
+              { label: "Agricultural Products (Coffee, tea, cocoa, etc.)", value: "Agricultural Products" },
+              { label: "Fisheries (Frozen fish, shrimp, squid, etc.)", value: "Fisheries" },
+            ]}
+          />
+          <RegisterField
             type="text"
             name="companyName"
             labelText="Company Name"
@@ -58,33 +102,24 @@ const Form = () => {
             register={register}
             error={errors.companyName}
           />
-          <FormField
-            type="text"
-            name="companyCategories"
-            labelText="Company Categories"
-            inputId="companyCategories"
-            register={register}
-            error={errors.companyCategories}
-          />
-          <FormField
-            type="text"
+          <RegisterField
+            type="number"
             name="yearsOfExperience"
             labelText="Years Of Experience"
             inputId="yearsOfExperience"
             register={register}
             error={errors.yearsOfExperience}
+            valueAsNumber={true}
           />
           <div className="flex gap-2">
-            <FormField
-              type="password"
+            <RegisterField
               name="password"
               labelText="Password"
               inputId="password"
               register={register}
               error={errors.password}
             />
-            <FormField
-              type="password"
+            <RegisterField
               name="confirmPassword"
               labelText="Confirm Password"
               inputId="confirmPassword"
@@ -100,16 +135,16 @@ const Form = () => {
             <span>or</span>
             <hr className="w-full text-transparent bg-gray-300" />
           </div>
-          <button className="bg-white border-2 border-gray-300 text-black font-medium px-4 py-2 rounded-2xl cursor-pointer hover:opacity-85 flex flex-row justify-center items-center gap-1 animate active:scale-95"><img
-              src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
-              alt="Google Icon"
-              className="w-[35px] h-[35px]"
-            />
-            Continue with Google
-          </button>
         </form>
+        <GoogleButton />
         <button className="w-full text-gray-500 font-medium">
-          Already have an Account ? <a href="/sign-in" className="font-bold underline text-blue-600 hover:opacity-80">Sign In</a>
+          Already have an Account ?{" "}
+          <a
+            href="/sign-in"
+            className="font-bold underline text-blue-600 hover:opacity-80"
+          >
+            Sign In
+          </a>
         </button>
       </div>
     </div>

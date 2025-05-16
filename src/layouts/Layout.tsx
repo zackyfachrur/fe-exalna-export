@@ -2,6 +2,7 @@ import { Outlet, matchPath } from "react-router-dom";
 import Navigation from "@layouts/Navigation";
 import Sidebar from "@layouts/Sidebar";
 import { MotionLayoutProvider } from "@context/MotionLayoutProvider";
+import { AuthProvider } from "@context/AuthContext";
 
 const Layout = () => {
   const routeLogin = "/sign-in"
@@ -10,7 +11,7 @@ const Layout = () => {
   const matchRegister = matchPath(routeRegister, location.pathname)
 
   return (
-    <>
+    <AuthProvider>
       <MotionLayoutProvider>
         {matchLogin || matchRegister ? (null) : <Navigation />}
         <div className="flex flex-row w-full justify-between">
@@ -20,7 +21,7 @@ const Layout = () => {
           </main>
         </div>
       </MotionLayoutProvider>
-    </>
+    </AuthProvider>
   );
 };
 
